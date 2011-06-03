@@ -55,9 +55,9 @@ if has("gui_running")
 	" .gvimrc
 	set guioptions-=T			" remove toolbar
 	set guioptions-=m			" remove menu bar
-	colorscheme darkspectrum	" gui colors 
+	colorscheme lucius2			" gui colors 
 else
-	colorscheme lucius2			" console colors
+	colorscheme lucius2_transparent " console colors
 endif
 
 
@@ -67,6 +67,7 @@ let python_slow_sync = 1
 
 " Markdowk
 au BufRead *.mkd set filetype=mkd
+
 
 " Highlight text going beyond column 79
 "highlight LenErr ctermbg=darkred ctermfg=white guibg=#592929
