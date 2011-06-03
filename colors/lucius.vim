@@ -10,14 +10,14 @@
 "
 " This file also tries to have descriptive comments for each higlighting group
 " so it is easy to understand what each part does.
-" XXX: Slight modifications by Brandon Thomas <echelon@gmail.com>
+
 
 set background=dark
 hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name="lucius2_transparent"
+let g:colors_name="lucius"
 
 " blue: 3eb8e5
 " green: 92d400
@@ -26,7 +26,7 @@ let g:colors_name="lucius2_transparent"
 " Base color
 " ----------
 hi Normal           guifg=#e4e4e4           guibg=#242424
-hi Normal           ctermfg=254             ctermbg=NONE
+hi Normal           ctermfg=254             ctermbg=235
 
 
 " Comment Group
@@ -161,7 +161,7 @@ hi Underlined       ctermfg=fg                                      cterm=underl
 " ------------
 " left blank, hidden
 hi Ignore           guifg=bg
-hi Ignore           ctermfg=NONE
+hi Ignore           ctermfg=bg
 
 
 " Error Group
@@ -198,10 +198,10 @@ hi SpellLocal                               ctermbg=14              cterm=underc
 " ------
 " character under the cursor
 hi Cursor           guifg=bg                guibg=#8ac6f2
-hi Cursor           ctermfg=NONE              ctermbg=117
+hi Cursor           ctermfg=bg              ctermbg=117
 " like cursor, but used when in IME mode
 hi CursorIM         guifg=bg                guibg=#96cdcd
-hi CursorIM         ctermfg=NONE              ctermbg=116
+hi CursorIM         ctermfg=bg              ctermbg=116
 " cursor column
 hi CursorColumn                             guibg=#3d3d4d
 hi CursorColumn     cterm=NONE              ctermbg=236
@@ -226,7 +226,7 @@ hi SignColumn       guifg=#9fafaf           guibg=#181818           gui=none
 hi SignColumn       ctermfg=145             ctermbg=233             cterm=none
 " line numbers
 hi LineNr           guifg=#857b6f           guibg=#444444
-hi LineNr           ctermfg=101             ctermbg=232
+hi LineNr           ctermfg=101             ctermbg=238
 " match parenthesis, brackets
 hi MatchParen       guifg=#00ff00           guibg=NONE              gui=none
 hi MatchParen       ctermfg=46              ctermbg=NONE            cterm=none
@@ -277,7 +277,7 @@ hi DiffText         ctermfg=fg
 " -----
 " line used for closed folds
 hi Folded           guifg=#a0a8b0           guibg=#404040           gui=none
-hi Folded           ctermfg=145             ctermbg=235             cterm=none
+hi Folded           ctermfg=145             ctermbg=238             cterm=none
 " column on side used to indicated open and closed folds
 hi FoldColumn       guifg=#b0d0e0           guibg=#305060           gui=none
 hi FoldColumn       ctermfg=152             ctermbg=23              cterm=none
@@ -288,8 +288,8 @@ hi FoldColumn       ctermfg=152             ctermbg=23              cterm=none
 hi IncSearch        guifg=#66ffff                                   gui=reverse
 hi IncSearch        ctermfg=87                                      cterm=reverse
 " hlsearch (last search pattern), also used for quickfix
-hi Search           guibg=#ffaa33          gui=none
-hi Search           ctermbg=214            cterm=underline
+hi Search                                    guibg=#ffaa33          gui=none
+hi Search                                    ctermbg=214            cterm=none
 
 " Popup Menu
 " ----------
@@ -321,13 +321,13 @@ hi StatusLineNC     ctermfg=244             ctermbg=238             cterm=none
 " ---------
 " tab pages line, not active tab page label
 hi TabLine          guifg=#b6bf98           guibg=#181818           gui=none
-hi TabLine          ctermfg=244             ctermbg=235             cterm=none
+hi TabLine          ctermfg=244             ctermbg=233             cterm=none
 " tab pages line, where there are no labels
 hi TabLineFill      guifg=#cfcfaf           guibg=#181818           gui=none
-hi TabLineFill      ctermfg=187             ctermbg=235             cterm=none
+hi TabLineFill      ctermfg=187             ctermbg=233             cterm=none
 " tab pages line, active tab page label
 hi TabLineSel       guifg=#efefef           guibg=#1c1c1b           gui=none
-hi TabLineSel       ctermfg=254             ctermbg=232             cterm=none
+hi TabLineSel       ctermfg=254             ctermbg=233             cterm=none
 
 " Visual
 " ------

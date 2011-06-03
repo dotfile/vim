@@ -338,4 +338,3 @@ hi Visual           ctermfg=NONE            ctermbg=60
 hi VisualNOS        guifg=fg                                        gui=underline
 hi VisualNOS        ctermfg=fg                                      cterm=underline
 
-
