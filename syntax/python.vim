@@ -71,6 +71,8 @@
 "    For "print" builtin as function:
 "       python_print_as_function
 
+let python_highlight_all = 1 
+
 " For version 5.x: Clear all syntax items
 " For version 6.x: Quit when a syntax file was already loaded
 if version < 600
