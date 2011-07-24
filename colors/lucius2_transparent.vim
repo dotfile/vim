@@ -25,7 +25,7 @@ let g:colors_name="lucius2_transparent"
 
 " Base color
 " ----------
-hi Normal           guifg=#e4e4e4           guibg=#242424
+hi Normal           guifg=#e4e4e4           guibg=#050505
 hi Normal           ctermfg=254             ctermbg=NONE
 
 
@@ -225,7 +225,7 @@ hi VertSplit        ctermfg=244             ctermbg=238             cterm=none
 hi SignColumn       guifg=#9fafaf           guibg=#181818           gui=none
 hi SignColumn       ctermfg=145             ctermbg=233             cterm=none
 " line numbers
-hi LineNr           guifg=#857b6f           guibg=#444444
+hi LineNr           guifg=#857b6f           guibg=#000000
 hi LineNr           ctermfg=101             ctermbg=232
 " match parenthesis, brackets
 hi MatchParen       guifg=#00ff00           guibg=NONE              gui=none
