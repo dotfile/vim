@@ -141,7 +141,7 @@ function! MyPrev()
 endfunction
 
 " Color scheme shifter plugin (F8 switches)
-"source ~/.vim/plugin/setcolors.vim
+source ~/.vim/plugin/setcolors.vim
 "SetColors all
 
 
