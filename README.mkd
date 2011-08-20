@@ -1,0 +1,11 @@
+My vim configurations, colorschemes, plugins, etc.
+Easy to sync between machines.
+
+**Install**
+
+`ln -s ~/.vim/vimrc ~/.vimrc`
+
+**Links** 
+
+* [https://github.com/echelon/dotfiles-bash](Bash configuration)
+* [https://github.com/echelon/dotfiles-vim](Vim configuration)

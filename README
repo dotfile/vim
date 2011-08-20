@@ -1,3 +1,0 @@
-My vim configurations, colorschemes, plugins. 
-Should be easy to unload these onto new machines quickly.
-ln -s ~/.vim/vimrc ~/.vimrc
