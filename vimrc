@@ -107,6 +107,9 @@ map <C-f> :NERDTree<CR>
 " New tab
 map <C-t> :tabnew<CR>
 
+" Toggle spelling
+map <F5> :set spell! spelllang=en_us<CR>
+
 " Movement between tabs OR buffers
 nnoremap <C-j> :call MyNext()<CR>
 nnoremap <C-k> :call MyPrev()<CR>
