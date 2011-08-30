@@ -1,55 +1,46 @@
-" http://github.com/echelon/dotfiles/blob/master/.vimrc
+" https://github.com/echelon/dotfiles-vim
+
+" ===== Behavior =====
 
 set nocompatible		" no vi bug compatibility
-set modelines=0			" no modelines (for security)
-"set encoding=utf-8		" encoding should be utf-8
-
-set backup				" keep backup (~) files
-"set nobackup 			" backup files removed when vim closes cleanly
-
-"set backupdir=.,$HOME/.vim/backup	" backup file dir
-"set directory=$HOME/.vim/swap 		" swapfile dir
-
-filetype plugin indent on " filetype dependent indenting and plugins
-set autoindent			" auto indents line relative to line above
-set smartindent
-
-set tabstop=4			" tab width preference
-set shiftwidth=4		" tab width preference
-"set expandtab			" uses spaces rather than tabs
-set backspace=eol,start,indent " backspace over everything in insert mode
-set smarttab 			" smarter tab and backspace
-
-"set showmatch
-
-syntax on				" highlighting
-set background=dark		" dark background
-
-set ttyfast				" smoother changes
-
-set ruler				" show line stats at bottom
-set number				" show line numbering
-
-set columns=85			" vim is only 85 columns wide 
-"set tw=79				" *force* margin at 79 characters
-set wrap				" set wrapping text
-set linebreak			" wordwrap so words aren't broken
-
+set ttyfast				" smoother changes for fast terminal connection
+set browsedir=current	" use pwd as current directory
+set hidden				" allow editing multiple unsaved buffers
 set mouse=a				" mouse support in all modes
 set mousehide			" hide mouse when typing text
-
+set backup				" keep backup (~) files
+set directory=$HOME/.vim/swap " swapfile dir
+set modelines=0			" no modelines (security)
 set wildmode=longest:full	" bash-like autocomplete
 set wildmenu				" bash-like autocomplete
+"set encoding=utf-8		" encoding should be utf-8
+"set backupdir=.,$HOME/.vim/backup	" backup file dir
 
-set hidden				" allow editing multiple unsaved buffers
+" ===== Editing =====
 
-set browsedir=current	" use pwd
+filetype plugin indent on " ft detection, plugins, indent plugins
+set autoindent			" auto indents line relative to line above
+set smartindent			" indent next line intelligently
+set smarttab 			" smarter tab and backspace insert behavior
+set tabstop=4			" number of spaces <Tab> represents
+set shiftwidth=4		" number of spaces for autoindent >>
+set foldmethod=indent	" create folds at indentation 
+set backspace=eol,start,indent " backspace over everything in insert mode
+set tw=79				" *force* margin at 79 characters
+set wrap				" set wrapping text
+set linebreak			" wordwrap so words aren't broken
+"set expandtab			" uses spaces rather than tabs
 
-set shm=atAI			" shortmsg, ignore swapfiles, no intro
+" ===== Appearance =====
 
+syntax on				" highlighting (syntax)
+set hlsearch			" highlighting (search term)
+set number				" show line numbering
+set ruler				" show line stats at bottom
+set shm=atAI			" shortmsg abbrs, ignore swapfiles, no intro
 set t_Co=256			" Terminal supports 256 colors
-
-set hlsearch			" Turn on search highlighting
+set background=dark		" dark background
+set columns=85			" vim is only 85 columns wide 
 
 if has("gui_running")
 	" .gvimrc
@@ -61,56 +52,25 @@ else
 	colorscheme lucius2_transparent " console colors
 endif
 
-
 " Python syntax highlighting
 let python_highlight_all = 1
 let python_slow_sync = 1
-
-" Markdowk
-au BufRead *.mkd set filetype=mkd
-
 
 " Highlight text going beyond column 79
 "highlight LenErr ctermbg=darkred ctermfg=white guibg=#592929
 "highlight LenErr ctermbg=black ctermfg=yellow guibg=#592929
 "match LenErr /\%>80v.*/ " Matches any over 80.
 
-
 "set vb t_vb=
 "set virtualedit=all
 
-
-" No arrow keys in command mode! 
-" This is a BAD HABBIT, and this should break me of it
-map <Up> :<CR>
-map <Down> :<CR>
-map <Left> :<CR>
-map <Right> :<CR>
-
-" Keyboard Mappings
-"map <F1> :previous<CR>	" open previous buffer
-"map <F2> :next<CR>		" open next buffer
-
-" Saving
-map <C-s> :w<CR>				" save file
-
-" Copy/paste from system clipboard
-vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>
-
-:nmap <Leader>s :source $MYVIMRC<CR>	" resource vimrc
-:nmap <Leader>v :e $MYVIMRC<CR>			" edit vimrc
-
-" Open NERDtree plugin
-map <C-f> :NERDTree<CR>
+" ===== Keyboard Shortcuts / Bindings =====
 
 " New tab
 map <C-t> :tabnew<CR>
 
-" Toggle spelling
-map <F5> :set spell! spelllang=en_us<CR>
-
 " Movement between tabs OR buffers
+" See MyNext(), MyPrev() below. 
 nnoremap <C-j> :call MyNext()<CR>
 nnoremap <C-k> :call MyPrev()<CR>
 nnoremap <C-h> :call MyPrev()<CR>
@@ -119,6 +79,30 @@ nnoremap <C-n> :call MyNext()<CR>
 nnoremap <C-p> :call MyPrev()<CR>
 nnoremap <C-Right> :call MyNext()<CR>
 nnoremap <C-Left> :call MyPrev()<CR>
+
+" Saving
+map <C-s> :w<CR>
+
+" Copy/paste from system clipboard
+vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+
+" No arrow keys in command mode! 
+" This is a BAD HABBIT, and this should break me of it
+map <Up> :<CR>
+map <Down> :<CR>
+map <Left> :<CR>
+map <Right> :<CR>
+
+" Easy edit and re-source of vimrc
+:nmap <Leader>s :source $MYVIMRC<CR>
+:nmap <Leader>v :e $MYVIMRC<CR>
+
+" Open NERDtree plugin
+map <C-f> :NERDTree<CR>
+
+" Toggle spelling
+map <F5> :set spell! spelllang=en_us<CR>
 
 " MyNext() and MyPrev(): Movement between tabs OR buffers
 " Taken from: http://stackoverflow.com/questions/53664/
@@ -146,5 +130,4 @@ endfunction
 " Color scheme shifter plugin (F8 switches)
 source ~/.vim/plugin/setcolors.vim
 "SetColors all
-
 
