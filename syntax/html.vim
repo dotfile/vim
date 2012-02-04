@@ -3,6 +3,7 @@
 " Maintainer:	Claudio Fleiner <claudio@fleiner.com>
 " URL:		http://www.fleiner.com/vim/syntax/html.vim
 " Last Change:  2006 Jun 19
+" XXX: Edited for HTML5 on 2011-01-11
 
 " Please check :help html.vim for some comments and a description of the options
 
@@ -58,6 +59,10 @@ syn match htmlTagName contained "\<\(b\|i\|u\|h[1-6]\|em\|strong\|head\|body\|ti
 syn keyword htmlTagName contained abbr acronym bdo button col label
 syn keyword htmlTagName contained colgroup del fieldset iframe ins legend
 syn keyword htmlTagName contained object optgroup q s tbody tfoot thead
+
+" new html 5 tags
+syn keyword htmlTagName contained video canvas nav article header footer
+syn keyword htmlTagName contained hgroup
 
 " legal arg names
 syn keyword htmlArg contained action
