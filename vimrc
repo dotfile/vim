@@ -48,6 +48,7 @@ if has("gui_running")
 	set guioptions-=m			" remove menu bar
 	set guioptions-=b			" horizontal scrollbar
 	colorscheme lucius2_transparent " gui colors 
+	set term=screen-256color		" fix tmux(?)
 else
 	colorscheme lucius2_transparent " console colors
 endif
