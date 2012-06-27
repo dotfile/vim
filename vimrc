@@ -28,7 +28,9 @@ set foldmethod=indent	" create folds at indentation
 set backspace=eol,start,indent " backspace over everything in insert mode
 set tw=79				" *force* margin at 79 characters
 set wrap				" set wrapping text
-set linebreak			" wordwrap so words aren't broken
+set linebreak			" wordwrap nicely (words aren't broken, looks nice)
+set textwidth=0			" don't automatically insert newlines on wrapped input
+set wrapmargin=0		" don't automatically insert newlines on wrapped input
 "set expandtab			" uses spaces rather than tabs
 
 " ===== Appearance =====

@@ -9,3 +9,5 @@ Easy to sync between machines.
 
 * [https://github.com/echelon/dotfiles-bash](Bash configuration)
 * [https://github.com/echelon/dotfiles-vim](Vim configuration)
+* [https://github.com/echelon/dotfiles-awesome](Awesome WM configuration)
+
