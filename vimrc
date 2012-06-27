@@ -42,7 +42,7 @@ set ruler				" show line stats at bottom
 set shm=atAI			" shortmsg abbrs, ignore swapfiles, no intro
 set t_Co=256			" Terminal supports 256 colors
 set background=dark		" dark background
-set columns=85			" vim is only 85 columns wide 
+set columns=80			" standard 80 columns wide (but resizes with window)
 
 if has("gui_running")
 	" .gvimrc
@@ -69,19 +69,22 @@ let python_slow_sync = 1
 
 " ===== Keyboard Shortcuts / Bindings =====
 
+" Makes jk navigation work in wrapped text.
+map j gj
+map k gk
+
 " New tab
 map <C-t> :tabnew<CR>
 
 " Movement between tabs OR buffers
 " See MyNext(), MyPrev() below. 
-nnoremap <C-j> :call MyNext()<CR>
-nnoremap <C-k> :call MyPrev()<CR>
-nnoremap <C-h> :call MyPrev()<CR>
-nnoremap <C-l> :call MyNext()<CR>
-nnoremap <C-n> :call MyNext()<CR>
-nnoremap <C-p> :call MyPrev()<CR>
-nnoremap <C-Right> :call MyNext()<CR>
-nnoremap <C-Left> :call MyPrev()<CR>
+" XXX: Removed. Going to try gt/gT from now on.
+"nnoremap <C-j> :call MyNext()<CR>
+"nnoremap <C-k> :call MyPrev()<CR>
+"nnoremap <C-h> :call MyPrev()<CR>
+"nnoremap <C-l> :call MyNext()<CR>
+"nnoremap <C-Right> :call MyNext()<CR>
+"nnoremap <C-Left> :call MyPrev()<CR>
 
 " Saving
 map <C-s> :w<CR>
