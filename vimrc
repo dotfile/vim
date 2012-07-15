@@ -72,6 +72,8 @@ let python_slow_sync = 1
 " Makes jk navigation work in wrapped text.
 map j gj
 map k gk
+map ^ g^
+map $ g$
 
 " New tab
 map <C-t> :tabnew<CR>
@@ -105,7 +107,7 @@ map <Right> :<CR>
 :nmap <Leader>v :e $MYVIMRC<CR>
 
 " Open NERDtree plugin
-map <C-f> :NERDTree<CR>
+"map <C-f> :NERDTree<CR>
 
 " Toggle spelling
 map <F5> :set spell! spelllang=en_us<CR>
