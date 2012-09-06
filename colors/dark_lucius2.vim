@@ -17,7 +17,7 @@ hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name="lucius2"
+let g:colors_name="dark_lucius2"
 
 " blue: 3eb8e5
 " green: 92d400

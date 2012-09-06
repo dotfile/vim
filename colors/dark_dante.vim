@@ -10,7 +10,7 @@ hi clear
 if exists("syntax on")
 	syntax reset
 endif
-let g:colors_name = "dante"
+let g:colors_name = "dark_dante"
 
 " General colors
 hi Normal	ctermfg=gray guifg=peachpuff3 guibg=black

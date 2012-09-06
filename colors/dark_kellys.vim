@@ -26,8 +26,8 @@ if version > 580
 	endif
 endif
 
-let colors_name = "kellys"
-let g:colors_name = "kellys"
+let colors_name = "dark_kellys"
+let g:colors_name = "dark_kellys"
 
 " black			2a2b2f	235
 " blue			62acce	81
