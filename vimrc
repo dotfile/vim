@@ -10,7 +10,7 @@ set mouse=a				" mouse support in all modes
 set mousehide			" hide mouse when typing text
 set backup				" keep backup (~) files
 set directory=$HOME/.vim/swap " swapfile dir
-set modelines=0			" no modelines (security)
+set modelines=1			" okay, modelines (but bad security)
 set wildmode=longest:full	" bash-like autocomplete
 set wildmenu				" bash-like autocomplete
 "set encoding=utf-8		" encoding should be utf-8
