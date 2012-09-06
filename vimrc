@@ -113,8 +113,8 @@ map <Right> :<CR>
 map <F5> :set spell! spelllang=en_us<CR>
 
 " Switch colorschemes
-map <F8> :call NextColor(-1)<CR>
-map <F9> :call NextColor(1)<CR>
+map <F9> :call NextColor(-1)<CR>
+map <F10> :call NextColor(1)<CR>
 
 " MyNext() and MyPrev(): Movement between tabs OR buffers
 " Taken from: http://stackoverflow.com/questions/53664/
