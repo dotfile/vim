@@ -49,10 +49,10 @@ if has("gui_running")
 	set guioptions-=T			" remove toolbar
 	set guioptions-=m			" remove menu bar
 	set guioptions-=b			" horizontal scrollbar
-	colorscheme lucius2			" gui colors 
+	colorscheme dark_lucius2	" gui colors 
 	set term=screen-256color	" fix tmux(?)
 else
-	colorscheme lucius2			" console colors
+	colorscheme dark_lucius2	" console colors
 endif
 
 " Python syntax highlighting
