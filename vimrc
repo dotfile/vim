@@ -49,10 +49,10 @@ if has("gui_running")
 	set guioptions-=T			" remove toolbar
 	set guioptions-=m			" remove menu bar
 	set guioptions-=b			" horizontal scrollbar
-	colorscheme dark_lucius2	" gui colors 
+	colorscheme dark_molokai	" gui colors 
 	set term=screen-256color	" fix tmux(?)
 else
-	colorscheme dark_lucius2	" console colors
+	colorscheme dark_molokai	" console colors
 endif
 
 " Python syntax highlighting
@@ -138,6 +138,11 @@ function! MyPrev()
 		execute ":bprev"
 	endif
 endfunction
+
+let g:solarized_termcolors=256
+let g:solarized_termtrans=0
+let g:solarized_background='light' "Only want light version
+let g:solarized_visibility='high'
 
 " Color scheme shifter plugin (F8 switches)
 source ~/.vim/plugin/setcolors.vim
