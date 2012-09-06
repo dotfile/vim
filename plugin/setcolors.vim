@@ -1,3 +1,5 @@
+" XXX: I've modified this a bit to search only the dirs I want. 
+"      see the configuration options below - bt
 " Change the color scheme from a list of color scheme names.
 " Version 2008-11-02 from http://vim.wikia.com/wiki/VimTip341
 " Press key:
@@ -17,6 +19,13 @@ endif
 let loaded_setcolors = 1
 let s:mycolors = []  " colorscheme names that we use to set color
 
+" These are the only dirs that are scanned.
+let s:mycolordirs = [ 
+		\ $HOME . '/.vim', 
+		\ $HOME . '/.config/.vim' 
+\]
+
+
 " Set list of color scheme names that we will use, except
 " argument 'now' actually changes the current color scheme.
 function! s:SetColors(args)
@@ -28,14 +37,18 @@ function! s:SetColors(args)
       let i += 5
     endwhile
   elseif a:args == 'all'
-    let paths = split(globpath(&runtimepath, 'colors/*.vim'), "\n")
+    "let paths = split(globpath(&runtimepath, 'colors/*.vim'), -- truncated
+	let mycolordirs = join(s:mycolordirs, ',')
+    let paths = split(globpath(mycolordirs, 'colors/*.vim'), "\n")
     let s:mycolors = map(paths, 'fnamemodify(v:val, ":t:r")')
     echo 'List of colors set from all installed color schemes'
   elseif a:args == 'my'
-    let c1 = 'default elflord peachpuff desert256 breeze morning'
-    let c2 = 'darkblue gothic aqua earth black_angus relaxedgreen'
-    let c3 = 'darkblack freya motus impact less chocolateliquor'
-    let s:mycolors = split(c1.' '.c2.' '.c3)
+	" XXX: None of these!
+    "let c1 = 'default elflord peachpuff desert256 breeze morning'
+    "let c2 = 'darkblue gothic aqua earth black_angus relaxedgreen'
+    "let c3 = 'darkblack freya motus impact less chocolateliquor'
+    "let s:mycolors = split(c1.' '.c2.' '.c3)
+	let s:mycolors = split('')
     echo 'List of colors set from built-in names'
   elseif a:args == 'now'
     call s:HourColor()
@@ -83,9 +96,10 @@ function! NextColor(how)
   endif
   echo g:colors_name
 endfunction
-nnoremap <F8> :call NextColor(1)<CR>
-nnoremap <S-F8> :call NextColor(-1)<CR>
-nnoremap <A-F8> :call NextColor(0)<CR>
+" XXX: Don't install these -- do in main vimrc
+"nnoremap <F8> :call NextColor(1)<CR>
+"nnoremap <S-F8> :call NextColor(-1)<CR>
+"nnoremap <A-F8> :call NextColor(0)<CR>
 
 " Set color scheme according to current time of day.
 function! s:HourColor()
