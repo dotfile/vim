@@ -63,7 +63,7 @@ hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name="zenburn"
+let g:colors_name="dark_zenburn"
 
 hi Boolean         guifg=#dca3a3
 hi Character       guifg=#dca3a3 gui=bold

@@ -14,7 +14,7 @@ if exists("syntax_on")
     syntax reset
 endif
 
-let g:colors_name = "oceanblack256"
+let g:colors_name = "dark_oceanbl"
 
 highlight Normal         cterm=none           ctermfg=7 ctermbg=0
 highlight NonText        cterm=none           ctermfg=117 ctermbg=0

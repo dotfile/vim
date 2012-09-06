@@ -10,8 +10,8 @@ if exists("syntax_on")
 	syntax reset
 endif
 
-let colors_name="herald"
-let g:colors_name="herald"
+let colors_name="dark_herald"
+let g:colors_name="dark_herald"
 set background=dark
 
 " Set some syntax-related variables
