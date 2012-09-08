@@ -1,3 +1,4 @@
+" XXX: Minor modifications by Brandon <echelon@gmail.com>
 " Vim color file
 "
 " Author: Tomas Restrepo <tomas@winterdom.com>
@@ -208,4 +209,9 @@ if &t_Co > 255
    hi CursorColumn                ctermbg=234
    hi LineNr          ctermfg=250 ctermbg=234
    hi NonText         ctermfg=250 ctermbg=234
+
+   " XXX: Tab theme by Brandon
+   hi TabLineSel	ctermfg=187 ctermbg=233		cterm=italic,bold,underline
+   hi TabLine		ctermfg=187 ctermbg=233		cterm=underline
+   hi TabLineFill	ctermfg=187 ctermbg=233		cterm=underline
 end
