@@ -22,6 +22,8 @@ filetype plugin indent on " ft detection, plugins, indent plugins
 set autoindent			" auto indents line relative to line above
 set smartindent			" indent next line intelligently
 set smarttab 			" smarter tab and backspace insert behavior
+set ignorecase			" ignore case in search and replace
+set smartcase			" case insensitive searching (requires ignorecase)
 set tabstop=4			" number of spaces <Tab> represents
 set shiftwidth=4		" number of spaces for autoindent >>
 set foldmethod=indent	" create folds at indentation 
