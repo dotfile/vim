@@ -57,6 +57,13 @@ else
 	colorscheme dark_molokai	" console colors
 endif
 
+" ===== Extra File Extension Detection =====
+
+au BufRead,BufNewFile *.{frag,vert,glsl,fp,vp} setfiletype glsl
+au BufRead,BufNewFile *.json setfiletype json
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} setfiletype mkd
+au BufRead,BufNewFile *.rs setfiletype rust
+
 " Python syntax highlighting
 let python_highlight_all = 1
 let python_slow_sync = 1
