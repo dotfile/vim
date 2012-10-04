@@ -59,10 +59,10 @@ endif
 
 " ===== Extra File Extension Detection =====
 
-au BufRead,BufNewFile *.{frag,vert,glsl,fp,vp} setfiletype glsl
-au BufRead,BufNewFile *.json setfiletype json
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} setfiletype mkd
-au BufRead,BufNewFile *.rs setfiletype rust
+au BufRead,BufNewFile *.{frag,vert,glsl,fp,vp} set filetype=glsl
+au BufRead,BufNewFile *.json set filetype=json
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
+au BufRead,BufNewFile *.rs set filetype=rust
 
 " Python syntax highlighting
 let python_highlight_all = 1
@@ -117,6 +117,9 @@ map <Right> :<CR>
 
 " Open NERDtree plugin
 "map <C-f> :NERDTree<CR>
+
+" I hate vim help. It's close to the escape key.
+map <F1> :<CR>
 
 " Toggle spelling
 map <F5> :set spell! spelllang=en_us<CR>
