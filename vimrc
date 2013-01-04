@@ -9,12 +9,12 @@ set hidden				" allow editing multiple unsaved buffers
 set mouse=a				" mouse support in all modes
 set mousehide			" hide mouse when typing text
 set backup				" keep backup (~) files
-set directory=$HOME/.vim/swap " swapfile dir
+set directory=$HOME/.config/vim/swap " swapfile dir
 set modelines=1			" okay, modelines (but bad security)
 set wildmode=longest:full	" bash-like autocomplete
 set wildmenu				" bash-like autocomplete
 "set encoding=utf-8		" encoding should be utf-8
-"set backupdir=.,$HOME/.vim/backup	" backup file dir
+"set backupdir=.,$HOME/.config/vim/backup	" backup file dir
 
 " ===== Editing =====
 
@@ -34,6 +34,7 @@ set linebreak			" wordwrap nicely (words aren't broken, looks nice)
 set textwidth=0			" don't automatically insert newlines on wrapped input
 set wrapmargin=0		" don't automatically insert newlines on wrapped input
 "set expandtab			" uses spaces rather than tabs
+set noexpandtab
 
 " ===== Appearance =====
 
@@ -64,6 +65,14 @@ au BufRead,BufNewFile *.json set filetype=json
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
 au BufRead,BufNewFile *.rs set filetype=rust
 
+" ===== File Type Tab Behavior =====
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
+autocmd FileType json setlocal shiftwidth=2 tabstop=2
+au FileType coffee setl sw=2 sts=2 et
+au FileType json setl sw=2 sts=2 et
+
 " Python syntax highlighting
 let python_highlight_all = 1
 let python_slow_sync = 1
@@ -77,12 +86,17 @@ let python_slow_sync = 1
 "set virtualedit=all
 
 " ===== Keyboard Shortcuts / Bindings =====
+" -- DOCUMENTATION -- 
+" map	normal, visual, select, operator
+" map!	insert, command
+" Xmap	n:normal, i:insert, v:visual+select, s:select, 
+" 		x:visual, c:command, o:operator
 
 " Makes jk navigation work in wrapped text.
 map j gj
 map k gk
-map ^ g^
-map $ g$
+map ^ <Home>
+map $ <End>
 
 " New tab
 map <C-t> :tabnew<CR>
@@ -98,7 +112,11 @@ map <C-t> :tabnew<CR>
 "nnoremap <C-Left> :call MyPrev()<CR>
 
 " Saving
-map <C-s> :w<CR>
+"map <C-s> :w<CR>
+
+" HIGHLY OPINIONATED CHANGE --
+" I hate that vim pastes at the cursor. I always want a newline
+nmap p :pu<CR>
 
 " Copy/paste from system clipboard
 vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
@@ -120,6 +138,7 @@ map <Right> :<CR>
 
 " I hate vim help. It's close to the escape key.
 map <F1> :<CR>
+map! <F1> <Left><Right>
 
 " Toggle spelling
 map <F5> :set spell! spelllang=en_us<CR>
@@ -157,6 +176,6 @@ let g:solarized_background='light' "Only want light version
 let g:solarized_visibility='high'
 
 " Color scheme shifter plugin (F8 switches)
-source ~/.vim/plugin/setcolors.vim
+source ~/.config/vim/plugin/setcolors.vim
 "SetColors all
 
