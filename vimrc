@@ -1,4 +1,11 @@
+" Brand Thomas' vimrc etc.
+" A highly opinionated vim config.
 " https://github.com/echelon/dotfiles-vim
+" web: http://brand.io 
+" email: bt at brand.io
+
+" TODO: mkd -> md
+" TODO: massive cleanup
 
 " ===== Behavior =====
 
@@ -48,6 +55,7 @@ set background=dark		" dark background
 set columns=80			" standard 80 columns wide (but resizes with window)
 
 if has("gui_running")
+	" Why would you ever do this? Honestly?
 	" .gvimrc
 	set guioptions-=T			" remove toolbar
 	set guioptions-=m			" remove menu bar
@@ -67,11 +75,18 @@ au BufRead,BufNewFile *.rs set filetype=rust
 
 " ===== File Type Tab Behavior =====
 
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
-autocmd FileType json setlocal shiftwidth=2 tabstop=2
+"autocmd FileType html setlocal shiftwidth=2 tabstop=2
+"autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
+"autocmd FileType json setlocal shiftwidth=2 tabstop=2
+
+" Languages with 2 Spaces
 au FileType coffee setl sw=2 sts=2 et
+au FileType html setl sw=2 sts=2 et
 au FileType json setl sw=2 sts=2 et
+
+" Languages with Tabs
+au FileType python setl sw=4 sts=4 noet
+
 
 " Python syntax highlighting
 let python_highlight_all = 1
