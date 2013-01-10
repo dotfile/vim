@@ -79,16 +79,17 @@ au BufRead,BufNewFile *.rs set filetype=rust
 "autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 "autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
-" Languages with 2 Spaces
+" Syntaxes with 2 Spaces
 au FileType coffee setl sw=2 sts=2 et
 au FileType html setl sw=2 sts=2 et
+au FileType jinja setl sw=2 sts=2 et
 au FileType json setl sw=2 sts=2 et
 
-" Languages with Tabs
+" Syntaxes with Tabs
 au FileType python setl sw=4 sts=4 noet
 
 
-" Python syntax highlighting
+" Python syntax highlighting specifics
 let python_highlight_all = 1
 let python_slow_sync = 1
 
