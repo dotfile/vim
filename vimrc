@@ -12,8 +12,8 @@
 set nocompatible		" no vi bug compatibility
 set ttyfast				" smoother changes for fast terminal connection
 set browsedir=current	" use pwd as current directory
-set hidden				" allow editing multiple unsaved buffers
-set mouse=a				" mouse support in all modes
+set hidden				" allow edit mult unsaved buffers
+"set mouse=a			" mouse support in all modes
 set mousehide			" hide mouse when typing text
 set backup				" keep backup (~) files
 set directory=$HOME/.config/vim/swap " swapfile dir
