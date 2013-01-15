@@ -43,9 +43,12 @@ set wrapmargin=0		" don't automatically insert newlines on wrapped input
 "set expandtab			" uses spaces rather than tabs
 set noexpandtab
 
+set wildignore=*.pyc,*~
+
 " ===== Appearance =====
 
 syntax on				" highlighting (syntax)
+set title				" change terminal title
 set hlsearch			" highlighting (search term)
 set number				" show line numbering
 set ruler				" show line stats at bottom
