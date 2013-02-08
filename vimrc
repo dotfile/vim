@@ -66,7 +66,7 @@ if has("gui_running")
 	colorscheme dark_molokai	" gui colors 
 	set term=screen-256color	" fix tmux(?)
 else
-	colorscheme dark_molokai	" console colors
+	colorscheme dark_molokai_t	" console colors
 endif
 
 " ===== Extra File Extension Detection =====
@@ -198,3 +198,16 @@ let g:solarized_visibility='high'
 source ~/.config/vim/plugin/setcolors.vim
 "SetColors all
 
+" Custom Fold Text
+" From http://stackoverflow.com/questions/
+" 5983396/change-the-text-in-folds
+function! MyFoldText()
+    let numLines = v:foldend - v:foldstart + 1
+    let linetext = substitute(getline(v:foldstart),"^ *","",1)
+    let txt = '+ ' . numLines . ' lines '
+    return txt
+endfunction
+"set foldtext=MyFoldText()
+
+" Yay, pathogens!
+execute pathogen#infect()
