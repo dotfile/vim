@@ -156,7 +156,7 @@ if &t_Co > 255
    hi IncSearch       ctermfg=193 ctermbg=16
 
    hi Keyword         ctermfg=161               cterm=bold
-   hi Label           ctermfg=229               cterm=none
+   hi Label           ctermfg=214               cterm=none
    hi Macro           ctermfg=193
    hi SpecialKey      ctermfg=81
 

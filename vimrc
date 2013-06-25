@@ -114,8 +114,10 @@ let python_slow_sync = 1
 " Makes jk navigation work in wrapped text.
 map j gj
 map k gk
-map ^ <Home>
-map $ <End>
+"map ^ <Home>
+"map $ <End>
+map ^ g^
+map $ g$
 
 " New tab
 map <C-t> :tabnew<CR>
@@ -140,6 +142,7 @@ nmap p :pu<CR>
 " Copy/paste from system clipboard
 vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+imap <C-v> <esc>:call setreg("\"",system("xclip -o -selection clipboard"))<CR>pi
 
 " No arrow keys in command mode! 
 " This is a BAD HABBIT, and this should break me of it
