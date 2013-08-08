@@ -112,7 +112,7 @@ let python_slow_sync = 1
 " 		x:visual, c:command, o:operator
 
 " Open tab to left of current. From: http://stackoverflow.com/a/13275945
-command -nargs=* -bar Tabnew :execute (tabpagenr()-1).'tabnew '.<q-args>
+command! -nargs=* -bar TabnewL :execute (tabpagenr()-1).'tabnew '.<q-args>
 
 " Makes jk navigation work in wrapped text.
 map j gj
@@ -124,7 +124,7 @@ map $ g$
 
 " New tab
 map <C-t> :tabnew<CR>
-map <C-T> :Tabnew<CR>
+map <C-e> :TabnewL<CR>
 
 " Movement between tabs OR buffers
 " See MyNext(), MyPrev() below. 
