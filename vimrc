@@ -1,4 +1,4 @@
-" Brand Thomas' vimrc etc.
+" Brandon Thomas' vimrc etc.
 " A highly opinionated vim config.
 " https://github.com/echelon/dotfiles-vim
 " web: http://brand.io 
@@ -135,6 +135,10 @@ map <C-e> :TabnewL<CR>
 "nnoremap <C-l> :call MyNext()<CR>
 "nnoremap <C-Right> :call MyNext()<CR>
 "nnoremap <C-Left> :call MyPrev()<CR>
+
+" Remove current search term/state
+" TODO: Make sure I didn't override a function
+nmap t :let @/ = ""<CR><CR>
 
 " Saving
 "map <C-s> :w<CR>
