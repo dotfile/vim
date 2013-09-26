@@ -52,10 +52,12 @@ set title				" change terminal title
 set hlsearch			" highlighting (search term)
 set number				" show line numbering
 set ruler				" show line stats at bottom
+"set rulerformat=%-14.(%c%V%)\ %P " Don't need line number
 set shm=atAI			" shortmsg abbrs, ignore swapfiles, no intro
 set t_Co=256			" Terminal supports 256 colors
 set background=dark		" dark background
 set columns=80			" standard 80 columns wide (but resizes with window)
+set laststatus=0		" no status line!
 
 if has("gui_running")
 	" Why would you ever do this? Honestly?
@@ -222,3 +224,35 @@ endfunction
 
 " Yay, pathogens!
 execute pathogen#infect()
+
+" Custom function to hide statusline
+function! StatusLineHide() 
+	set laststatus=0
+endfunction
+
+function! StatusLineShow() 
+	set laststatus=2
+endfunction
+
+"function! StatusLineToggle()
+"	let md = mode()
+"	if md == 'n'
+"		call StatusLineHide()
+"	else
+"		call StatusLineShow()
+"	endif
+"endfunction
+
+" Kind of exhaustive to toggle status lines...
+" Not covering all cases here.
+nnoremap i :call StatusLineShow()<Esc>i
+nnoremap I :call StatusLineShow()<Esc>I
+nnoremap a :call StatusLineShow()<Esc>a
+nnoremap A :call StatusLineShow()<Esc>A
+nnoremap v :call StatusLineShow()<Esc>v
+nnoremap V :call StatusLineShow()<Esc>V
+
+" Extra <CR> to clear command line
+inoremap <Esc> <Esc>:call StatusLineHide()<CR>:<CR><Esc>
+vnoremap <Esc> <Esc>:call StatusLineHide()<CR>:<CR><Esc>
+
