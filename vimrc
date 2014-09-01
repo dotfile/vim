@@ -91,7 +91,9 @@ au FileType jinja setl sw=2 sts=2 et
 au FileType json setl sw=2 sts=2 et
 
 " Syntaxes with Tabs
-au FileType python setl sw=4 sts=4 noet
+"au FileType python setl sw=4 sts=4 noet
+"au FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+au FileType python setlocal noexpandtab shiftwidth=4 softtabstop=4
 
 
 " Python syntax highlighting specifics
