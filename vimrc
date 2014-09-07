@@ -1,260 +1,324 @@
 " Brandon Thomas' vimrc etc.
-" A highly opinionated vim config.
+" An opinionated vim config.
 " https://github.com/echelon/dotfiles-vim
 " web: http://brand.io 
-" email: bt at brand.io
+" mail: bt at brand.io
+ 
+" TODO: massive cleanup (ongoing as of 2014-09-01)
 
-" TODO: mkd -> md
-" TODO: massive cleanup
+" ======================================================================
+" VUNDLE PACKAGE MANAGEMENT FOR VIMSCRIPT, COLORS, FTDETECT, ETC.
+" ======================================================================
 
-" ===== Behavior =====
+" Vundle Notes: 
+" Source vimrc, then call :PluginInstall to install/update plugins.
+" Use ! to force reinstallation of all bundles. 
+" Also, :PluginClean
 
-set nocompatible		" no vi bug compatibility
-set ttyfast				" smoother changes for fast terminal connection
-set browsedir=current	" use pwd as current directory
-set hidden				" allow edit mult unsaved buffers
-"set mouse=a			" mouse support in all modes
-set mousehide			" hide mouse when typing text
-set backup				" keep backup (~) files
-set directory=$HOME/.config/vim/swap " swapfile dir
-set modelines=1			" okay, modelines (but bad security)
-set wildmode=longest:full	" bash-like autocomplete
-set wildmenu				" bash-like autocomplete
-"set encoding=utf-8		" encoding should be utf-8
-"set backupdir=.,$HOME/.config/vim/backup	" backup file dir
+  filetype on  " Must toggle so Mac doesn't return nonzero exit code.
+  filetype off " (Only use Macs for work...)
 
-" ===== Editing =====
+  set rtp +=~/.vim/bundle/Vundle.vim " Runtime path
+  call vundle#begin()
 
-filetype plugin indent on " ft detection, plugins, indent plugins
-set autoindent			" auto indents line relative to line above
-set smartindent			" indent next line intelligently
-set smarttab 			" smarter tab and backspace insert behavior
-set ignorecase			" ignore case in search and replace
-set smartcase			" case insensitive searching (requires ignorecase)
-set tabstop=4			" number of spaces <Tab> represents
-set shiftwidth=4		" number of spaces for autoindent >>
-set foldmethod=indent	" create folds at indentation 
-set backspace=eol,start,indent " backspace over everything in insert mode
-set tw=79				" *force* margin at 79 characters
-set wrap				" set wrapping text
-set linebreak			" wordwrap nicely (words aren't broken, looks nice)
-set textwidth=0			" don't automatically insert newlines on wrapped input
-set wrapmargin=0		" don't automatically insert newlines on wrapped input
-"set expandtab			" uses spaces rather than tabs
-set noexpandtab
+  " ===== Vundle Plugins =====
+    Plugin 'gmarik/Vundle.vim'
+    Plugin 'bkad/CamelCaseMotion'
+    Plugin 'terryma/vim-smooth-scroll'
+    Plugin 'elzr/vim-json'
 
-set wildignore=*.pyc,*~
+  call vundle#end()
+  filetype plugin indent on " ft detection, plugins, indent plugins
 
-" ===== Appearance =====
+" ======================================================================
+" CORE VIM CONFIGURATION OPTIONS
+" ======================================================================
 
-syntax on				" highlighting (syntax)
-set title				" change terminal title
-set hlsearch			" highlighting (search term)
-set number				" show line numbering
-set ruler				" show line stats at bottom
-"set rulerformat=%-14.(%c%V%)\ %P " Don't need line number
-set shm=atAI			" shortmsg abbrs, ignore swapfiles, no intro
-set t_Co=256			" Terminal supports 256 colors
-set background=dark		" dark background
-set columns=80			" standard 80 columns wide (but resizes with window)
-set laststatus=0		" no status line!
+" Vim Core Configuration Notes:
+" Use `:help 'directive'` for manpage (use single quotes to disambiguate).
+" Use `:set directive?` to introspect current value.
 
-if has("gui_running")
-	" Why would you ever do this? Honestly?
-	" .gvimrc
-	set guioptions-=T			" remove toolbar
-	set guioptions-=m			" remove menu bar
-	set guioptions-=b			" horizontal scrollbar
-	colorscheme dark_molokai	" gui colors 
-	set term=screen-256color	" fix tmux(?)
-else
-	colorscheme dark_molokai_t	" console colors
-endif
+  " ===== Core =====
+  set nocompatible		    " This is vim. No ancient vi bug compatability.
+  set hidden				      " Allow editing multiple unsaved buffers (duh)
+  set encoding=utf-8		  " Encoding should be utf-8
+  set ttyfast				      " Smoother for fast terminal connections
+  set wim=longest:full    " [wildmode] Bash-like autocomplete
+  set wildmenu				    " Bash-like autocomplete
 
-" ===== Extra File Extension Detection =====
+  " ===== Filesystem / Backups =====
+  set backup				      " Keep backup (~) files
+  set browsedir=current	  " Use pwd as current directory
+  set backupdir=.,$HOME/.config/vim/backup  " Backup file dirs (in order)
+  set directory=$HOME/.config/vim/swap      " Swapfile dir
+  set wildignore+=*~      " Don't tab complete these files
+  set wig+=*.pyc,*.pyo    " (continued)
+  set wig+=*.o            " (continued)
 
-au BufRead,BufNewFile *.{frag,vert,glsl,fp,vp} set filetype=glsl
-au BufRead,BufNewFile *.json set filetype=json
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
-au BufRead,BufNewFile *.rs set filetype=rust
+  " ===== Mode Behaviors =====
+  set modelines=1			    " What was this ?? - (bad security - ??)
+  set backspace=eol       " I-mode: backspace over EOL to join lines
+  set backspace+=indent   " I-mode: backspace over autoindentation
+  set backspace+=start    " I-mode: backspace over start of insert
 
-" ===== File Type Tab Behavior =====
+  " ===== Spacing, Tabs, and Indenting =====
+  set expandtab			      " Use spaces instead of tabs (work convinced me)
+  set tabstop=2			      " Number of spaces <Tab> represents
+  set shiftwidth=2	      " Number of spaces for autoindent (>>)
+  set autoindent		      " Auto indents line relative to line above
+  set smartindent		      " Indent next line intelligently
+  set smarttab 			      " Smarter tab and backspace insert behavior
 
-"autocmd FileType html setlocal shiftwidth=2 tabstop=2
-"autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
-"autocmd FileType json setlocal shiftwidth=2 tabstop=2
+  " ===== Text Wrapping, Margin =====
+  set tw=79				        " Force margin at 79 characters
+  set wrap				        " Wrap text
+  set linebreak			      " Wrap nicely (words aren't broken, looks nice)
+  set textwidth=0			    " No auto insert of newlines on wrapped input
+  set wrapmargin=0		    " No auto insert of newlines on wrapped input
 
-" Syntaxes with 2 Spaces
-au FileType coffee setl sw=2 sts=2 et
-au FileType html setl sw=2 sts=2 et
-au FileType jinja setl sw=2 sts=2 et
-au FileType json setl sw=2 sts=2 et
+  " ===== Code Folding =====
+  set foldmethod=indent	  " Create folds at indentation 
+  set foldlevelstart=20	  " Starting fold level when opening files
 
-" Syntaxes with Tabs
-"au FileType python setl sw=4 sts=4 noet
-"au FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-au FileType python setlocal noexpandtab shiftwidth=4 softtabstop=4
+  " ===== Search and Replace =====
+  set ignorecase			    " Ignore case in search and replace
+  set smartcase			      " Case insensitive searching (requires ignorecase)
+  set hlsearch			      " Highlighting of search term
+
+  " ===== Colors and Appearance =====
+  syntax on				        " Syntax Highlighting
+  colo dark_molokai_t	    " Molokai is the bestest evar!!1
+  set background=dark	    " Dark background
+  set t_Co=256			      " Terminal supports 256 colors
+  set title				        " Change the terminal title
+  set number			        " Show line numbering
+  set ruler				        " Show line stats at bottom
+  set shm=atAI			      " Shortmsg abbrs, ignore swapfiles, no intro
+  set columns=80			    " Std 80 cols wide (but resize with window)
+  set laststatus=0		    " No status line!
+  "set rulerformat=%-14.(%c%V%)\ %P " Don't need line number
+
+  " ===== Super Lame Gui Mode =====
+
+  if has("gui_running")
+    " Why would you ever run from a gui? 
+    " Such torture. Much disappoint.
+    " Also Consider : ~/.gvimrc
+    set mousehide			    " Hide mouse when typing text
+    set guioptions-=T			" Remove toolbar
+    set guioptions-=m			" Remove menu bar
+    set guioptions-=b			" Horizontal scrollbar
+    set term=screen-256color	" fix tmux(?)
+    colorscheme dark_molokai	" gui colors 
+  else
+    "set mouse=a			" mouse support in all modes
+  endif
 
 
-" Python syntax highlighting specifics
-let python_highlight_all = 1
-let python_slow_sync = 1
 
-" Highlight text going beyond column 79
-"highlight LenErr ctermbg=darkred ctermfg=white guibg=#592929
-"highlight LenErr ctermbg=black ctermfg=yellow guibg=#592929
-"match LenErr /\%>80v.*/ " Matches any over 80.
+" TODO: All of this is a disorganized mess. 
 
-"set vb t_vb=
-"set virtualedit=all
+" ======================================================================
+" CUSTOM BINDINGS, SCRIPTING, OVERRIDES, AND MISC CARGO-CULTED VIMSCRIPT
+" ======================================================================
 
-" ===== Keyboard Shortcuts / Bindings =====
-" -- DOCUMENTATION -- 
+" Notes On Functions: 
+" Suffix ! denotes redeclaration is idempotent (ie. file reloaded)
+" Function name must normally start with uppercase.
+" Provide local scope with prefix `s:`; needn't be uppercase.
+"
+" Notes On Key Remapping:
 " map	normal, visual, select, operator
 " map!	insert, command
 " Xmap	n:normal, i:insert, v:visual+select, s:select, 
 " 		x:visual, c:command, o:operator
 
-" Open tab to left of current. From: http://stackoverflow.com/a/13275945
-command! -nargs=* -bar TabnewL :execute (tabpagenr()-1).'tabnew '.<q-args>
+" Vim Tabs: ============================================================
 
-" Makes jk navigation work in wrapped text.
-map j gj
-map k gk
-"map ^ <Home>
-"map $ <End>
-map ^ g^
-map $ g$
+  " Open tab to left of current.
+  " From : http://stackoverflow.com/a/13275945
+  command! -nargs=* -bar TabnewL :execute (tabpagenr()-1).'tabnew '.<q-args>
 
-" New tab
-map <C-t> :tabnew<CR>
-map <C-e> :TabnewL<CR>
+  " Movement between tabs OR buffers.
+  " From : http://stackoverflow.com/a/83984
+  function! MyNext()
+    if exists( '*tabpagenr' ) && tabpagenr('$') != 1
+      " Tab support && tabs open
+      normal gt
+    else
+      " No tab support, or no tabs open
+      execute ":bnext"
+    endif
+  endfunction
 
-" Movement between tabs OR buffers
-" See MyNext(), MyPrev() below. 
-" XXX: Removed. Going to try gt/gT from now on.
-"nnoremap <C-j> :call MyNext()<CR>
-"nnoremap <C-k> :call MyPrev()<CR>
-"nnoremap <C-h> :call MyPrev()<CR>
-"nnoremap <C-l> :call MyNext()<CR>
-"nnoremap <C-Right> :call MyNext()<CR>
-"nnoremap <C-Left> :call MyPrev()<CR>
+  function! MyPrev()
+    if exists( '*tabpagenr' ) && tabpagenr('$') != '1'
+      " Tab support && tabs open
+      normal gT
+    else
+      " No tab support, or no tabs open
+      execute ":bprev"
+    endif
+  endfunction
 
-" Remove current search term/state
-" TODO: Make sure I didn't override a function
-nmap t :let @/ = ""<CR><CR>
+  " Open new tabs
+  map <C-t> :tabnew<CR>
+  map <C-w> :TabnewL<CR>
 
-" Saving
-"map <C-s> :w<CR>
+  " XXX: Removed. Going to use gt/gT from now on.
+  "nnoremap <C-j> :call MyNext()<CR>
+  "nnoremap <C-k> :call MyPrev()<CR>
+  "nnoremap <C-h> :call MyPrev()<CR>
+  "nnoremap <C-l> :call MyNext()<CR>
+  "nnoremap <C-Right> :call MyNext()<CR>
+  "nnoremap <C-Left> :call MyPrev()<CR>
 
-" HIGHLY OPINIONATED CHANGE --
-" I hate that vim pastes at the cursor. I always want a newline
-nmap p :pu<CR>
+" Text Navigation And Movements: =======================================
 
-" Copy/paste from system clipboard
-vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
-imap <C-v> <esc>:call setreg("\"",system("xclip -o -selection clipboard"))<CR>pi
+  " Makes jk navigation work in wrapped text.
+  map j gj
+  map k gk
+  map ^ g^
+  map $ g$
 
-" No arrow keys in command mode! 
-" This is a BAD HABBIT, and this should break me of it
-map <Up> :<CR>
-map <Down> :<CR>
-map <Left> :<CR>
-map <Right> :<CR>
+  " The default "CamelCaseMotion" keys
+  map ,w <Plug>CamelCaseMotion_w
+  map ,b <Plug>CamelCaseMotion_b
+  map ,e <Plug>CamelCaseMotion_e
 
-" Easy edit and re-source of vimrc
-:nmap <Leader>s :source $MYVIMRC<CR>
-:nmap <Leader>v :e $MYVIMRC<CR>
+  " IntelliJ has pseudo-CamelCaseMotion keys (match them)
+  map [w <Plug>CamelCaseMotion_w
+  map [b <Plug>CamelCaseMotion_b
+  map [e <Plug>CamelCaseMotion_e
 
-" Open NERDtree plugin
-"map <C-f> :NERDTree<CR>
+  " Disable "Beginner Mode" (the only way to learn)
+  " No Arrow Keys in Command Mode! 
+  map <Up> :<CR>
+  map <Down> :<CR>
+  map <Left> :<CR>
+  map <Right> :<CR>
 
-" I hate vim help. It's close to the escape key.
-map <F1> :<CR>
-map! <F1> <Left><Right>
+" Status Line: =========================================================
 
-" Toggle spelling
-map <F5> :set spell! spelllang=en_us<CR>
+  " Show/hide statusline.
+  function! StatusLineHide() 
+    set laststatus=0
+  endfunction
 
-" Switch colorschemes
-map <F9> :call NextColor(-1)<CR>
-map <F10> :call NextColor(1)<CR>
+  function! StatusLineShow() 
+    set laststatus=2
+  endfunction
 
-" MyNext() and MyPrev(): Movement between tabs OR buffers
-" Taken from: http://stackoverflow.com/questions/53664/
-" how-to-effectively-work-with-multiple-files-in-vim 
-function! MyNext()
-	if exists( '*tabpagenr' ) && tabpagenr('$') != 1
-		" Tab support && tabs open
-		normal gt
-	else
-		" No tab support, or no tabs open
-		execute ":bnext"
-	endif
-endfunction
+  " Kind of exhaustive to toggle status lines...
+  " Not covering all cases here.
+  nnoremap i :call StatusLineShow()<Esc>i
+  nnoremap I :call StatusLineShow()<Esc>I
+  nnoremap a :call StatusLineShow()<Esc>a
+  nnoremap A :call StatusLineShow()<Esc>A
+  nnoremap v :call StatusLineShow()<Esc>v
+  nnoremap V :call StatusLineShow()<Esc>V
 
-function! MyPrev()
-	if exists( '*tabpagenr' ) && tabpagenr('$') != '1'
-		" Tab support && tabs open
-		normal gT
-	else
-		" No tab support, or no tabs open
-		execute ":bprev"
-	endif
-endfunction
+  " Extra <CR> to clear command line
+  inoremap <Esc> <Esc>:call StatusLineHide()<CR>:<CR><Esc>
+  vnoremap <Esc> <Esc>:call StatusLineHide()<CR>:<CR><Esc>
 
-let g:solarized_termcolors=256
-let g:solarized_termtrans=0
-let g:solarized_background='light' "Only want light version
-let g:solarized_visibility='high'
+" Pasting And Buffer: ==================================================
 
-" Color scheme shifter plugin (F8 switches)
-source ~/.config/vim/plugin/setcolors.vim
-"SetColors all
+  " HIGHLY OPINIONATED CHANGE, YOU PROBABLY WON'T LIKE IT.
+  " I hate that vim pastes at the cursor. I always want a newline.
+  nmap p :pu<CR>
 
-" Custom Fold Text
-" From http://stackoverflow.com/questions/
-" 5983396/change-the-text-in-folds
-function! MyFoldText()
-    let numLines = v:foldend - v:foldstart + 1
-    let linetext = substitute(getline(v:foldstart),"^ *","",1)
-    let txt = '+ ' . numLines . ' lines '
-    return txt
-endfunction
-"set foldtext=MyFoldText()
+  " Copy/paste from system clipboard
+  " Requires `xclip` binary.
+  vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+  nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+  imap <C-v> <esc>:call setreg("\"",system("xclip -o -selection clipboard"))<CR>pi
 
-" Yay, pathogens!
-execute pathogen#infect()
+" Ungrouped Stuff: =====================================================
 
-" Custom function to hide statusline
-function! StatusLineHide() 
-	set laststatus=0
-endfunction
+  " Remove current search term/state
+  " TODO: Make sure I didn't override a function
+  nmap t :let @/ = ""<CR><CR>
 
-function! StatusLineShow() 
-	set laststatus=2
-endfunction
+  " Saving
+  "map <C-s> :w<CR>
 
-"function! StatusLineToggle()
-"	let md = mode()
-"	if md == 'n'
-"		call StatusLineHide()
-"	else
-"		call StatusLineShow()
-"	endif
-"endfunction
+  " Easy edit and re-source of vimrc
+  :nmap <Leader>s :source $MYVIMRC<CR>
+  :nmap <Leader>v :e $MYVIMRC<CR>
 
-" Kind of exhaustive to toggle status lines...
-" Not covering all cases here.
-nnoremap i :call StatusLineShow()<Esc>i
-nnoremap I :call StatusLineShow()<Esc>I
-nnoremap a :call StatusLineShow()<Esc>a
-nnoremap A :call StatusLineShow()<Esc>A
-nnoremap v :call StatusLineShow()<Esc>v
-nnoremap V :call StatusLineShow()<Esc>V
+  " Open NERDtree plugin
+  "map <C-f> :NERDTree<CR>
 
-" Extra <CR> to clear command line
-inoremap <Esc> <Esc>:call StatusLineHide()<CR>:<CR><Esc>
-vnoremap <Esc> <Esc>:call StatusLineHide()<CR>:<CR><Esc>
+  " I hate vim help. It's close to the escape key.
+  map <F1> :<CR>
+  map! <F1> <Left><Right>
 
+  " Toggle spelling
+  map <F5> :set spell! spelllang=en_us<CR>
+
+  " Switch colorschemes
+  map <F9> :call NextColor(-1)<CR>
+  map <F10> :call NextColor(1)<CR>
+
+  " Color scheme shifter plugin (F8 switches)
+  source ~/.config/vim/plugin/setcolors.vim
+  "SetColors all
+
+  " Custom Fold Text
+  " From http://stackoverflow.com/questions/
+  " 5983396/change-the-text-in-folds
+  function! MyFoldText()
+      let numLines = v:foldend - v:foldstart + 1
+      let linetext = substitute(getline(v:foldstart),"^ *","",1)
+      let txt = '+ ' . numLines . ' lines '
+      return txt
+  endfunction
+  "set foldtext=MyFoldText()
+
+" ======================================================================
+" SCRIPT AND COLORSCHEME CONFIGURATIONS
+" ======================================================================
+
+  let g:solarized_termcolors=256
+  let g:solarized_termtrans=0
+  let g:solarized_background='light' "Only want light version
+  let g:solarized_visibility='high'
+
+  " Python syntax highlighting specifics
+  let python_highlight_all = 1
+  let python_slow_sync = 1
+
+" ===== Extra File Extension Detection =====
+
+  au BufRead,BufNewFile *.{frag,vert,glsl,fp,vp} set filetype=glsl
+  au BufRead,BufNewFile *.json set filetype=json
+  au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=md
+  au BufRead,BufNewFile *.rs set filetype=rust
+
+" ===== File Type Tab Behavior =====
+
+  "autocmd FileType html setlocal shiftwidth=2 tabstop=2
+  "autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
+  "autocmd FileType json setlocal shiftwidth=2 tabstop=2
+
+  " Syntaxes with 2 Spaces
+  au FileType coffee setl sw=2 sts=2 et
+  au FileType html setl sw=2 sts=2 et
+  au FileType jinja setl sw=2 sts=2 et
+  au FileType json setl sw=2 sts=2 et
+
+  " Syntaxes with Tabs
+  "au FileType python setl sw=4 sts=4 noet
+  "au FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+  au FileType python setlocal noexpandtab shiftwidth=4 softtabstop=4
+
+" ===== Remove Any Unused Cruftiness =====
+
+  " Highlight text going beyond column 79
+  "highlight LenErr ctermbg=darkred ctermfg=white guibg=#592929
+  "highlight LenErr ctermbg=black ctermfg=yellow guibg=#592929
+  "match LenErr /\%>80v.*/ " Matches any over 80.
+
+  "set vb t_vb=
+  "set virtualedit=all
