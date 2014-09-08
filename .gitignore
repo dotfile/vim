@@ -1,4 +1,5 @@
 *~
 *.sw?
 swap/*
+bundle/
 .netrwhist
