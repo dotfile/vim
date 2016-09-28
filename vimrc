@@ -53,9 +53,13 @@
     "Plugin 'felixhummel/setcolors'      " Function to change colorscheme
 
   " ===== Syntax =====
+    Plugin 'cespare/vim-toml'
     Plugin 'elzr/vim-json'
     Plugin 'groenewege/vim-less'
+    Plugin 'leafgarland/typescript-vim'
+    Plugin 'rust-lang/rust.vim'
     Plugin 'tikhomirov/vim-glsl'
+
     "Plugin 'beyondmarc/glsl.vim' (alt, evolution of the one I used)
 
   call vundle#end()
@@ -155,6 +159,7 @@
   au FileType css setl sw=2 sts=2 et
   au FileType html setl sw=2 sts=2 et
   au FileType json setl sw=2 sts=2 et
+  au FileType rust setl sw=2 sts=2 et
 
   " Syntaxes with 4 spaces, no tabs.
   au FileType python setl sw=4 sts=4 et
