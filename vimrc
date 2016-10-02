@@ -129,7 +129,7 @@
   set number			        " Show line numbering
   set ruler				        " Show line stats at bottom
   set shm=atAI			      " Shortmsg abbrs, ignore swapfiles, no intro
-  set columns=80			    " Std 80 cols wide (but resize with window)
+  "set columns=80			    " Std 80 cols wide (but resize with window)
   set synmaxcol=200       " No highlight beyond col (bad *MLs!)
   set laststatus=0		    " No status line!
   set cursorline          " Highlight the line the cursor is on
