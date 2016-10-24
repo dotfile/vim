@@ -1,12 +1,12 @@
 " The Vim Configs Of Brandon Thomas:
 " These are a little bit opinionated. They're primarily designed for
 " Linux, but try to work for my workpace Mac too. Not much thought is
-" given to GUI usage. I typically edit HTML, Python, JS, C++, etc., so 
+" given to GUI usage. I typically edit HTML, Python, JS, C++, etc., so
 " these formats drive most of the evolution here.
-"   - web: http://brand.io 
-"   - mail: bt at brand.io
+"   - web: http://brand.io
+"   - mail: bt at brand.io | echelon at gmail
 "   - git: https://github.com/echelon/dotfiles-vim
- 
+
 " TABLE OF CONTENTS:
 "   [1] Vundle Packages
 "   [2] Core Vim Configuration
@@ -20,17 +20,17 @@
 "   - plugin/ (python_editing, setcolors)
 "   - ftdetect/ (misc)
 
-" TODO: Write a plugin or autowrapping on key-bindings. Support 
-" comments strings, various syntaxes. Like IntelliJ's Ctrl+L. 
+" TODO: Write a plugin or autowrapping on key-bindings. Support
+" comments strings, various syntaxes. Like IntelliJ's Ctrl+L.
 " Global var for wrap length, but also movement-based override.
 
 " ======================================================================
 " [1] VUNDLE PACKAGE MANAGEMENT FOR VIMSCRIPT, COLORS, FTDETECT, ETC.
 " ======================================================================
 
-" Vundle Notes: 
+" Vundle Notes:
 " Source vimrc, then call :PluginInstall to install/update plugins.
-" Use ! to force reinstallation of all bundles. 
+" Use ! to force reinstallation of all bundles.
 " Also, :PluginClean
 
   filetype on  " Must toggle so Mac doesn't return nonzero exit code.
@@ -57,8 +57,10 @@
     Plugin 'elzr/vim-json'
     Plugin 'groenewege/vim-less'
     Plugin 'leafgarland/typescript-vim'
+    Plugin 'mustache/vim-mustache-handlebars'
     Plugin 'rust-lang/rust.vim'
     Plugin 'tikhomirov/vim-glsl'
+    Plugin 'uarun/vim-protobuf'
 
     "Plugin 'beyondmarc/glsl.vim' (alt, evolution of the one I used)
 
@@ -112,7 +114,7 @@
   set wrapmargin=0		    " No auto insert of newlines on wrapped input
 
   " ===== Code Folding =====
-  set foldmethod=indent	  " Create folds at indentation 
+  set foldmethod=indent	  " Create folds at indentation
   set foldlevelstart=20	  " Starting fold level when opening files
 
   " ===== Search and Replace =====
@@ -138,14 +140,14 @@
   " ===== Super Lame Gui Mode =====
 
   if has("gui_running")
-    " Why would you choose to run vim inside a gui? Such sad. 
+    " Why would you choose to run vim inside a gui? Such sad.
     " Consider putting config garbage here instead: ~/.gvimrc
     set mousehide			    " Hide mouse when typing text
     set guioptions-=T			" Remove toolbar
     set guioptions-=m			" Remove menu bar
     set guioptions-=b			" Horizontal scrollbar
     set term=screen-256color	" fix tmux(?)
-    colorscheme dark_molokai	" gui colors 
+    colorscheme dark_molokai	" gui colors
   else
     "set mouse=a			" mouse support in all modes
   endif
@@ -187,11 +189,14 @@
   let python_highlight_all = 1
   let python_slow_sync = 1
 
+  " It's so silly that the JSON syntax plugin hides quotes!
+  let g:vim_json_syntax_conceal = 0
+
 " ======================================================================
 " [5] CUSTOM BINDINGS, SCRIPTING, OVERRIDES, AND CARGO-CULTED VIMSCRIPT
 " ======================================================================
 
-  " Notes On Functions: 
+  " Notes On Functions:
   " Suffix ! denotes redeclaration is idempotent (ie. file reloaded)
   " Function name must normally start with uppercase.
   " Provide local scope with prefix `s:`; needn't be uppercase.
@@ -199,7 +204,7 @@
   " Notes On Key Remapping:
   " map	normal, visual, select, operator
   " map!	insert, command
-  " Xmap	n:normal, i:insert, v:visual+select, s:select, 
+  " Xmap	n:normal, i:insert, v:visual+select, s:select,
   " 		x:visual, c:command, o:operator
   "
   " Yet More Notes:
@@ -242,7 +247,7 @@
   map ^ g^
   map $ g$
 
-  " The default "CamelCaseMotion" keys 
+  " The default "CamelCaseMotion" keys
   " Must specify because of other overrides.
   map ,w <Plug>CamelCaseMotion_w
   map ,b <Plug>CamelCaseMotion_b
@@ -254,16 +259,16 @@
   map [e <Plug>CamelCaseMotion_e
 
 " Status Line: =========================================================
-  " To conserve vertical space (since I often use small form-factor 
-  " netbooks), I've made my status line modal. It only shows up in 
+  " To conserve vertical space (since I often use small form-factor
+  " netbooks), I've made my status line modal. It only shows up in
   " visual mode.
 
   " Show/hide statusline.
-  function! StatusLineHide() 
+  function! StatusLineHide()
     set laststatus=0
   endfunction
 
-  function! StatusLineShow() 
+  function! StatusLineShow()
     set laststatus=2
   endfunction
 
@@ -287,7 +292,7 @@
 
   " TODO: Make this work inside my work Mac and inside tmux.
 
-  " HIGHLY OPINIONATED CHANGE, YOU PROBABLY WON'T LIKE IT. 
+  " HIGHLY OPINIONATED CHANGE, YOU PROBABLY WON'T LIKE IT.
   " I hate that vim pastes at the cursor. I always want a newline.
   " TODO: Trying not to use anymore as of 2014-09-08. I miss it so bad.
   "nmap p :pu<CR> " Sigh, having to conform to everyone else's reality...
@@ -297,7 +302,7 @@
   vmap <C-c> y: call system("xclip -i -selection clipboard",
       \ getreg("\""))<CR>
   nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
-  imap <C-v> <esc>:call setreg("\"", 
+  imap <C-v> <esc>:call setreg("\"",
       \ system("xclip -o -selection clipboard"))<CR>pi
 
 " Old Ungrouped Stuff: =================================================
