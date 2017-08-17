@@ -258,6 +258,11 @@
   map [b <Plug>CamelCaseMotion_b
   map [e <Plug>CamelCaseMotion_e
 
+" Modalities: ==========================================================
+
+  " Switch between showing line numbers
+  nmap <C-L> :set number!<CR>
+
 " Status Line: =========================================================
   " To conserve vertical space (since I often use small form-factor
   " netbooks), I've made my status line modal. It only shows up in
