@@ -60,6 +60,7 @@
     Plugin 'mustache/vim-mustache-handlebars'
     Plugin 'rust-lang/rust.vim'
     Plugin 'tikhomirov/vim-glsl'
+    Plugin 'sudar/vim-arduino-syntax'
     Plugin 'uarun/vim-protobuf'
 
     "Plugin 'beyondmarc/glsl.vim' (alt, evolution of the one I used)
