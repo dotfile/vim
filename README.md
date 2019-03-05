@@ -4,6 +4,7 @@ Easy to sync between machines.
 **Install**
 
 `ln -s ~/.vim/vimrc ~/.vimrc`
+`mkdir -p ~/.config/nvim && ln -s ~/.vim/init.vim ~/.config/nvim/init.vim`
 
 **My other dotfiles and configs** 
 
