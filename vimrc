@@ -28,11 +28,11 @@
 " [1] VIMPLUG PACKAGE MANAGEMENT FOR VIMSCRIPT, COLORS, FTDETECT, ETC.
 " ======================================================================
 
-	if empty(glob('~/.vim/autoload/plug.vim'))
-		silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-					\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
 
   " Call `:PlugInstall` to install newly-added plugins.
   call plug#begin('~/.vim/plugged')
@@ -54,7 +54,7 @@
     Plug 'uarun/vim-protobuf'
 
   " ===== Plugins to Try Later =====
-    "Plug 'beyondmarc/glsl.vim' 			 " (alt, evolution of the one I used)
+    "Plug 'beyondmarc/glsl.vim'        " (alt, evolution of the one I used)
     "Plug 'felixhummel/setcolors'      " Function to change colorscheme
     "Plug 'itchyny/lightline.vim'      " Status line
     "Plug 'kien/ctrlp'                 " File, history, etc. finder
@@ -72,17 +72,17 @@
 " Use `:set directive?` to introspect current value.
 
   " ===== Core =====
-  set nocompatible		    " This is vim. No ancient vi bug compatability.
-  set hidden				      " Allow editing multiple unsaved buffers (duh)
-  set encoding=utf-8		  " Encoding should be utf-8
-  set modelines=0			    " Don't load other people's modelines
-  set ttyfast				      " Smoother for fast terminal connections
+  set nocompatible        " This is vim. No ancient vi bug compatability.
+  set hidden              " Allow editing multiple unsaved buffers (duh)
+  set encoding=utf-8      " Encoding should be utf-8
+  set modelines=0         " Don't load other people's modelines
+  set ttyfast             " Smoother for fast terminal connections
   set wim=longest:full    " [wildmode] Bash-like autocomplete
-  set wildmenu				    " Bash-like autocomplete
+  set wildmenu            " Bash-like autocomplete
 
   " ===== Filesystem / Backups =====
-  set backup				      " Keep backup (~) files
-  set browsedir=current	  " Use pwd as current directory
+  set backup              " Keep backup (~) files
+  set browsedir=current   " Use pwd as current directory
   set backupdir=.,$HOME/.config/vim/backup  " Backup file dirs (in order)
   set directory=$HOME/.config/vim/swap      " Swapfile dir
   set wildignore+=*~      " Don't tab complete these files
@@ -95,41 +95,41 @@
   set backspace+=start    " I-mode: backspace over start of insert
 
   " ===== Spacing, Tabs, and Indenting =====
-  set expandtab			      " Use spaces instead of tabs (work convinced me)
-  set tabstop=2			      " Number of spaces <Tab> represents
-  set shiftwidth=2	      " Number of spaces for autoindent (>>)
-  set autoindent		      " Auto indents line relative to line above
-  set smartindent		      " Indent next line intelligently
-  set smarttab 			      " Smarter tab and backspace insert behavior
+  set expandtab           " Use spaces instead of tabs (work convinced me)
+  set tabstop=2           " Number of spaces <Tab> represents
+  set shiftwidth=2        " Number of spaces for autoindent (>>)
+  set autoindent          " Auto indents line relative to line above
+  set smartindent         " Indent next line intelligently
+  set smarttab            " Smarter tab and backspace insert behavior
 
   " ===== Text Wrapping, Margin =====
-  set tw=79				        " Force margin at 79 characters
-  set wrap				        " Wrap text
-  set linebreak			      " Wrap nicely (words aren't broken, looks nice)
-  set textwidth=0			    " No auto insert of newlines on wrapped input
-  set wrapmargin=0		    " No auto insert of newlines on wrapped input
+  set tw=79               " Force margin at 79 characters
+  set wrap                " Wrap text
+  set linebreak           " Wrap nicely (words aren't broken, looks nice)
+  set textwidth=0         " No auto insert of newlines on wrapped input
+  set wrapmargin=0        " No auto insert of newlines on wrapped input
 
   " ===== Code Folding =====
-  set foldmethod=indent	  " Create folds at indentation
-  set foldlevelstart=20	  " Starting fold level when opening files
+  set foldmethod=indent   " Create folds at indentation
+  set foldlevelstart=20   " Starting fold level when opening files
 
   " ===== Search and Replace =====
-  set ignorecase			    " Ignore case in search and replace
-  set smartcase			      " Case insensitive searching (requires ignorecase)
-  set hlsearch			      " Highlighting of search term
+  set ignorecase          " Ignore case in search and replace
+  set smartcase           " Case insensitive searching (requires ignorecase)
+  set hlsearch            " Highlighting of search term
 
   " ===== Colors and Appearance =====
-  syntax on				        " Syntax Highlighting
-  colo dark_molokai_t	    " Molokai is the bestest evar!!1
-  set background=dark	    " Dark background
-  set t_Co=256			      " Terminal supports 256 colors
-  set title				        " Change the terminal title
-  set number			        " Show line numbering
-  set ruler				        " Show line stats at bottom
-  set shm=atAI			      " Shortmsg abbrs, ignore swapfiles, no intro
-  "set columns=80			    " Std 80 cols wide (but resize with window)
+  syntax on               " Syntax Highlighting
+  colo dark_molokai_t     " Molokai is the bestest evar!!1
+  set background=dark     " Dark background
+  set t_Co=256            " Terminal supports 256 colors
+  set title               " Change the terminal title
+  set number              " Show line numbering
+  set ruler               " Show line stats at bottom
+  set shm=atAI            " Shortmsg abbrs, ignore swapfiles, no intro
+  "set columns=80         " Std 80 cols wide (but resize with window)
   set synmaxcol=200       " No highlight beyond col (bad *MLs!)
-  set laststatus=0		    " No status line!
+  set laststatus=0        " No status line!
   set cursorline          " Highlight the line the cursor is on
   "set rulerformat=%-14.(%c%V%)\ %P " Don't need line number
 
@@ -138,14 +138,14 @@
   if has("gui_running")
     " Why would you choose to run vim inside a gui? Such sad.
     " Consider putting config garbage here instead: ~/.gvimrc
-    set mousehide			    " Hide mouse when typing text
-    set guioptions-=T			" Remove toolbar
-    set guioptions-=m			" Remove menu bar
-    set guioptions-=b			" Horizontal scrollbar
-    set term=screen-256color	" fix tmux(?)
-    colorscheme dark_molokai	" gui colors
+    set mousehide          " Hide mouse when typing text
+    set guioptions-=T      " Remove toolbar
+    set guioptions-=m      " Remove menu bar
+    set guioptions-=b      " Horizontal scrollbar
+    set term=screen-256color  " fix tmux(?)
+    colorscheme dark_molokai  " gui colors
   else
-    "set mouse=a			" mouse support in all modes
+    "set mouse=a           " mouse support in all modes
   endif
 
 " ======================================================================
@@ -198,10 +198,10 @@
   " Provide local scope with prefix `s:`; needn't be uppercase.
   "
   " Notes On Key Remapping:
-  " map	normal, visual, select, operator
-  " map!	insert, command
-  " Xmap	n:normal, i:insert, v:visual+select, s:select,
-  " 		x:visual, c:command, o:operator
+  " map        normal, visual, select, operator
+  " map!       insert, command
+  " Xmap       n:normal, i:insert, v:visual+select, s:select,
+  "            x:visual, c:command, o:operator
   "
   " Yet More Notes:
   " Wrap your vimscript with \ after the newline.
