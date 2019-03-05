@@ -1,5 +1,7 @@
 *~
 *.sw?
-swap/*
+autoload/
 bundle/
+plugged/
+swap/*
 .netrwhist

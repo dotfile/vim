@@ -1,14 +1,14 @@
 " The Vim Configs Of Brandon Thomas:
 " These are a little bit opinionated. They're primarily designed for
 " Linux, but try to work for my workpace Mac too. Not much thought is
-" given to GUI usage. I typically edit HTML, Python, JS, C++, etc., so
+" given to GUI usage. I typically edit Rust, JS, HTML, Python, etc., so
 " these formats drive most of the evolution here.
 "   - web: http://brand.io
 "   - mail: bt at brand.io | echelon at gmail
-"   - git: https://github.com/echelon/dotfiles-vim
+"   - git: https://github.com/dotfile/vim
 
 " TABLE OF CONTENTS:
-"   [1] Vundle Packages
+"   [1] VimPlug Packages
 "   [2] Core Vim Configuration
 "   [3] Filetype-specific Configs
 "   [4] Plugin-specific Config Overrides
@@ -25,48 +25,43 @@
 " Global var for wrap length, but also movement-based override.
 
 " ======================================================================
-" [1] VUNDLE PACKAGE MANAGEMENT FOR VIMSCRIPT, COLORS, FTDETECT, ETC.
+" [1] VIMPLUG PACKAGE MANAGEMENT FOR VIMSCRIPT, COLORS, FTDETECT, ETC.
 " ======================================================================
 
-" Vundle Notes:
-" Source vimrc, then call :PluginInstall to install/update plugins.
-" Use ! to force reinstallation of all bundles.
-" Also, :PluginClean
+	if empty(glob('~/.vim/autoload/plug.vim'))
+		silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+					\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	endif
 
-  filetype on  " Must toggle so Mac doesn't return nonzero exit code.
-  filetype off " (Only use Macs for work...)
-
-  set rtp +=~/.vim/bundle/Vundle.vim " Runtime path
-  call vundle#begin()
-    Plugin 'gmarik/Vundle.vim'
-
+  " Call `:PlugInstall` to install newly-added plugins.
+  call plug#begin('~/.vim/plugged')
   " ===== Plugins =====
-    Plugin 'bkad/CamelCaseMotion'       " Motions inside camel/snake case
-    Plugin 'scrooloose/nerdtree'        " File tree navigation sidebar
-    Plugin 'terryma/vim-smooth-scroll'  " Smooth scrolling (kind of nice)
-
-  " ===== Plugins to Try Later =====
-    "Plugin 'kien/ctrlp'                 " File, history, etc. finder
-    "Plugin 'scrooloose/syntastic'       " Syntax error highlighting
-    "Plugin 'tpope/vim-fugitive'         " Git wrapper
-    "Plugin 'tpope/vim-surround'         " Tags, parens, quotes, etc.
-    "Plugin 'felixhummel/setcolors'      " Function to change colorscheme
+    Plug 'bkad/CamelCaseMotion'       " Motions inside camel/snake case
+    Plug 'mhinz/vim-signify'          " VCS integration to show changes
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " File tree sidebar
+    Plug 'terryma/vim-smooth-scroll'  " Smooth scrolling (kind of nice)
 
   " ===== Syntax =====
-    Plugin 'cespare/vim-toml'
-    Plugin 'elzr/vim-json'
-    Plugin 'groenewege/vim-less'
-    Plugin 'leafgarland/typescript-vim'
-    Plugin 'mustache/vim-mustache-handlebars'
-    Plugin 'rust-lang/rust.vim'
-    Plugin 'tikhomirov/vim-glsl'
-    Plugin 'sudar/vim-arduino-syntax'
-    Plugin 'uarun/vim-protobuf'
+    Plug 'cespare/vim-toml'
+    Plug 'elzr/vim-json'
+    Plug 'groenewege/vim-less'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'mustache/vim-mustache-handlebars'
+    Plug 'rust-lang/rust.vim'
+    Plug 'sudar/vim-arduino-syntax'
+    Plug 'tikhomirov/vim-glsl'
+    Plug 'uarun/vim-protobuf'
 
-    "Plugin 'beyondmarc/glsl.vim' (alt, evolution of the one I used)
-
-  call vundle#end()
-  filetype plugin indent on " ft detection, plugins, indent plugins
+  " ===== Plugins to Try Later =====
+    "Plug 'beyondmarc/glsl.vim' 			 " (alt, evolution of the one I used)
+    "Plug 'felixhummel/setcolors'      " Function to change colorscheme
+    "Plug 'itchyny/lightline.vim'      " Status line
+    "Plug 'kien/ctrlp'                 " File, history, etc. finder
+    "Plug 'scrooloose/syntastic'       " Syntax error highlighting
+    "Plug 'tpope/vim-fugitive'         " Git wrapper
+    "Plug 'tpope/vim-surround'         " Tags, parens, quotes, etc.
+  call plug#end()
 
 " ======================================================================
 " [2] CORE VIM CONFIGURATION OPTIONS
@@ -94,7 +89,7 @@
   set wig+=*.pyc,*.pyo    " (continued)
   set wig+=*.o            " (continued)
 
-  " ===== Mode Behaviors =====
+  " ===== Backspace Behaviors =====
   set backspace=eol       " I-mode: backspace over EOL to join lines
   set backspace+=indent   " I-mode: backspace over autoindentation
   set backspace+=start    " I-mode: backspace over start of insert
@@ -314,8 +309,8 @@
 " Old Ungrouped Stuff: =================================================
 
   " Remove current search term/state
-  " TODO: Make sure I didn't override a function
-  nmap t :let @/ = ""<CR><CR>
+  " TODO(2019-03-05): Removed as it overrides an important navigation movement
+  "nmap t :let @/ = ""<CR><CR>
 
   " Toggle spelling
   map <F5> :set spell! spelllang=en_us<CR>
@@ -327,6 +322,7 @@
 
   " Open NERDtree plugin
   "map <C-f> :NERDTree<CR>
+  map <F8> :NERDTreeToggle<CR>
   "map <Leader>n :<CR>
 
   " Change the Fold Text
