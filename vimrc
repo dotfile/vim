@@ -38,7 +38,6 @@
   call plug#begin('~/.vim/plugged')
   " ===== Plugins =====
     Plug 'bkad/CamelCaseMotion'       " Motions inside camel/snake case
-    Plug 'mhinz/vim-signify'          " VCS integration to show changes
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " File tree sidebar
     Plug 'terryma/vim-smooth-scroll'  " Smooth scrolling (kind of nice)
 
@@ -58,6 +57,7 @@
     "Plug 'felixhummel/setcolors'      " Function to change colorscheme
     "Plug 'itchyny/lightline.vim'      " Status line
     "Plug 'kien/ctrlp'                 " File, history, etc. finder
+    "Plug 'mhinz/vim-signify'          " VCS integration to show changes
     "Plug 'scrooloose/syntastic'       " Syntax error highlighting
     "Plug 'tpope/vim-fugitive'         " Git wrapper
     "Plug 'tpope/vim-surround'         " Tags, parens, quotes, etc.
@@ -84,7 +84,7 @@
   set backup              " Keep backup (~) files
   set browsedir=current   " Use pwd as current directory
   set backupdir=.,$HOME/.config/vim/backup  " Backup file dirs (in order)
-  set directory=$HOME/.config/vim/swap      " Swapfile dir
+  set directory=.,$HOME/.config/vim/swap      " Swapfile dir
   set wildignore+=*~      " Don't tab complete these files
   set wig+=*.pyc,*.pyo    " (continued)
   set wig+=*.o            " (continued)
