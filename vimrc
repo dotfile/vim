@@ -84,7 +84,7 @@
   set backup              " Keep backup (~) files
   set browsedir=current   " Use pwd as current directory
   set backupdir=.,$HOME/.config/vim/backup  " Backup file dirs (in order)
-  set directory=.,$HOME/.config/vim/swap      " Swapfile dir
+  set directory=$HOME/.config/vim/swap,.    " Swapfile dir
   set wildignore+=*~      " Don't tab complete these files
   set wig+=*.pyc,*.pyo    " (continued)
   set wig+=*.o            " (continued)
