@@ -300,11 +300,12 @@
 
   " Copy/paste from system clipboard
   " Requires `xclip` binary.
-  vmap <C-c> y: call system("xclip -i -selection clipboard",
-      \ getreg("\""))<CR>
-  nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
-  imap <C-v> <esc>:call setreg("\"",
-      \ system("xclip -o -selection clipboard"))<CR>pi
+  " NB(bt,2023-03-08): This appears to be breaking Ctrl-V visual mode now?
+  "vmap <C-c> y: call system("xclip -i -selection clipboard",
+  "    \ getreg("\""))<CR>
+  "nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+  "imap <C-v> <esc>:call setreg("\"",
+  "    \ system("xclip -o -selection clipboard"))<CR>pi
 
 " Old Ungrouped Stuff: =================================================
 
